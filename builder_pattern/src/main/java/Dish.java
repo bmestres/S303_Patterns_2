@@ -8,4 +8,16 @@ public abstract class Dish {
         this.isVegan = isVegan;
         this.isGlutenFree = isGlutenFree;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isVegan() {
+        return isVegan;
+    }
+
+    public boolean isGlutenFree() {
+        return isGlutenFree;
+    }
 }

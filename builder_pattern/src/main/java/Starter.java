@@ -1,7 +1,7 @@
 public class Starter extends Dish {
-    private String suplement;
+    private Suplement suplement;
 
-    public Starter(String name, boolean isVegan, boolean isGlutenFree, String suplement) {
+    public Starter(String name, boolean isVegan, boolean isGlutenFree, Suplement suplement) {
         super(name, isVegan, isGlutenFree);
         this.suplement = suplement;
     }

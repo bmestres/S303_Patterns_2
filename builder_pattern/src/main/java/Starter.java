@@ -1,8 +1,12 @@
-public class Starter extends Dish {
-    private Suplement suplement;
+public class Starter implements StarterStage{
 
-    public Starter(String name, boolean isVegan, boolean isGlutenFree, Suplement suplement) {
-        super(name, isVegan, isGlutenFree);
-        this.suplement = suplement;
+    @Override
+    public StarterStage isVegan() {
+        return null;
+    }
+
+    @Override
+    public StarterStage isGlutenFree() {
+        return null;
     }
 }

@@ -1,4 +1,4 @@
 public interface DrinkStage {
-    DrinkStage withDrink(String drink);
+    BuildStage withDrink(String drink);
     Menu build();
 }

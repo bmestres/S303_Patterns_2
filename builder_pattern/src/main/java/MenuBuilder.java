@@ -1,4 +1,4 @@
-public class MenuBuilder implements FirstStage, StarterStage, MainCourseStage, CoffeeStage, DrinkStage {
+public class MenuBuilder implements FirstStage {
 
     private final Menu menu;
 
@@ -9,61 +9,100 @@ public class MenuBuilder implements FirstStage, StarterStage, MainCourseStage, C
     @Override
     public StarterStage withStarter(String starterName) {
         this.menu.setStarterName(starterName);
-        return this;
-    }
-
-    @Override
-    public MenuBuilder isVegan() {
-        if(this.menu.getStarterName() == null){
-            this.menu.setVeganStarter(true);
-        } else {
-            this.menu.setVeganMainCourse(true);
-        }
-        return this;
-    }
-
-    @Override
-    public StarterStage isGlutenFree() {
-        if(this.menu.getStarterName() == null){
-            this.menu.setGlutenFreeStarter(true);
-        } else {
-            this.menu.setGlutenFreeMainCourse(true);
-        }
-        return this;
+        return new StartBuilder();
     }
 
     @Override
     public MainCourseStage withMainCourse(String mainCourseName) {
         this.menu.setMainCourseName(mainCourseName);
-        return this;
+        return new MainCourseBuilder();
     }
 
-    @Override
-    public MainCourseStage withSuplement(String suplement) {
-        this.menu.setSuplementMainCourse(suplement);
-        return this;
+    private class StartBuilder implements StarterStage {
+        @Override
+        public StarterStage isVegan() {
+            menu.setVeganStarter(true);
+            return this;
+        }
+
+        @Override
+        public StarterStage isGlutenFree() {
+            menu.setGlutenFreeStarter(true);
+            return this;
+        }
+
+        @Override
+        public MainCourseStage withMainCourse(String mainCourse) {
+            menu.setMainCourseName(mainCourse);
+            return new MainCourseBuilder();
+        }
     }
 
-    @Override
-    public DrinkStage withDessert(String dessert) {
-        this.menu.setDessertName(dessert);
-        return this;
+        private class MainCourseBuilder implements MainCourseStage {
+            @Override
+            public MainCourseStage isVegan() {
+                menu.setVeganMainCourse(true);
+                return this;
+            }
+
+            @Override
+            public MainCourseStage isGlutenFree() {
+                menu.setGlutenFreeMainCourse(true);
+                return this;
+            }
+
+            @Override
+            public MainCourseStage withSuplement(String suplement) {
+                menu.setSuplementMainCourse(suplement);
+                return this;
+            }
+
+            @Override
+            public DrinkStage withDessert(String dessert) {
+                menu.setDessertName(dessert);
+                return new DessertOrCoffeeBuilder();
+            }
+
+            @Override
+            public DrinkStage withCoffee(String coffee) {
+                menu.setCoffeeName(coffee);
+                return new DessertOrCoffeeBuilder();
+            }
+
+            @Override
+            public BuildStage withDrink(String drink) {
+                menu.setDrinkName(drink);
+                return new FinalBuilder();
+            }
+
+            @Override
+            public Menu build(){
+                return menu;
+            }
+        }
+
+        private class DessertOrCoffeeBuilder implements DrinkStage {
+
+            @Override
+            public BuildStage withDrink(String drink) {
+                menu.setDrinkName(drink);
+                return new FinalBuilder();
+            }
+
+            @Override
+            public Menu build() {
+                return menu;
+            }
+        }
+
+        private class FinalBuilder implements BuildStage {
+            @Override
+            public Menu build() {
+                return menu;
+            }
+        }
     }
 
-    @Override
-    public DrinkStage withCoffee(String coffee) {
-        this.menu.setCoffeeName(coffee);
-        return this;
-    }
 
-    @Override
-    public DrinkStage withDrink(String drink) {
-        this.menu.setDrinkName(drink);
-        return this;
-    }
 
-    @Override
-    public Menu build() {
-        return this.menu;
-    }
-}
+

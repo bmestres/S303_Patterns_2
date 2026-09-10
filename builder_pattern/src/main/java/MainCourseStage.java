@@ -1,8 +1,6 @@
 public interface MainCourseStage {
-    MainCourseStage isVegan();
-    MainCourseStage isGlutenFree();
     MainCourseStage withSuplement(String suplement);
 
-    DessertStage withDessert(String dessert);
-    CoffeeStage withCoffee(String coffee);
+    DrinkStage withDessert(String dessert);
+    DrinkStage withCoffee(String coffee);
 }

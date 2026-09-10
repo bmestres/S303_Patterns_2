@@ -1,3 +1,4 @@
 public interface DessertStage {
-    DrinkStage withDessert();
+    DessertStage withDrink();
+    Menu build();
 }

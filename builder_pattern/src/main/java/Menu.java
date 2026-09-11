@@ -25,6 +25,22 @@ public class Menu {
         this.drinkName = "";
     }
 
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "starterName='" + starterName + '\'' +
+                ", veganStarter=" + veganStarter +
+                ", glutenFreeStarter=" + glutenFreeStarter +
+                ", mainCourseName='" + mainCourseName + '\'' +
+                ", veganMainCourse=" + veganMainCourse +
+                ", glutenFreeMainCourse=" + glutenFreeMainCourse +
+                ", suplementMainCourse='" + suplementMainCourse + '\'' +
+                ", dessertName='" + dessertName + '\'' +
+                ", coffeeName='" + coffeeName + '\'' +
+                ", drinkName='" + drinkName + '\'' +
+                '}';
+    }
+
     public String getStarterName() {
         return starterName;
     }

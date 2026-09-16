@@ -29,4 +29,32 @@ class StockAgentTest {
         assertEquals(alphaBrokersExpectedDOWNMessage, ((StockBrokerAgency)alphaBrokers).getLatestMessage());
         assertEquals(zenitInvestmentsExpectedDOWNMessage, ((StockBrokerAgency)zenithInvestments).getLatestMessage());
     }
+
+    @Test
+    void stockMarketChangeShouldNotifyAgencies() {
+        StockAgent agent = new StockAgent();
+
+        MockAgency alphaBrokers = new MockAgency();
+        MockAgency zenithInvestments = new MockAgency();
+
+        agent.addObserver(alphaBrokers);
+        agent.addObserver(zenithInvestments);
+
+        agent.stockMarketUp(25.67);
+
+        String expectedMessageUp = String.format("Stock market went UP to %.2f", 25.67);
+
+        alphaBrokers.expect(expectedMessageUp);
+        zenithInvestments.expect(expectedMessageUp);
+
+        alphaBrokers.verify();
+        zenithInvestments.verify();
+
+        agent.stockMarketDown(39.57);
+
+        String expectedMessageDown = String.format("Stock market went DOWN to %.2f", 25.67);
+
+        alphaBrokers.expect(expectedMessageDown);
+        zenithInvestments.expect(expectedMessageDown);
+    }
 }

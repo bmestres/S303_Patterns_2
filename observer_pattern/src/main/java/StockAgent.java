@@ -15,7 +15,6 @@ public class StockAgent {
         this.agencies.remove(agency);
     }
 
-
     public void stockMarketUp(double stockValue) {
         this.stockMarketValue = stockValue;
 

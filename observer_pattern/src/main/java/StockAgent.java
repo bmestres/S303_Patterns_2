@@ -11,7 +11,7 @@ public class StockAgent {
         this.agencies.add(agency);
     }
 
-    public void removeObserver(StockBrokerAgency agency) {
+    public void removeObserver(Agency agency) {
         this.agencies.remove(agency);
     }
 

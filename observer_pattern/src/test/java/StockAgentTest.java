@@ -11,8 +11,8 @@ class StockAgentTest {
 
         StockAgent agent = new StockAgent();
 
-        StockBrokerAgency alphaBrokers = new StockBrokerAgency("Alpha Brokers");
-        StockBrokerAgency zenithInvestments = new StockBrokerAgency("Zenith Investments");
+        Agency alphaBrokers = new StockBrokerAgency("Alpha Brokers");
+        Agency zenithInvestments = new StockBrokerAgency("Zenith Investments");
 
         agent.addObserver(alphaBrokers);
         agent.addObserver(zenithInvestments);
@@ -30,7 +30,5 @@ class StockAgentTest {
 
         assertEquals(alphaBrokersExpectedDOWNMessage, alphaBrokers.getLatestMessage());
         assertEquals(zenitInvestmentsExpectedDOWNMessage, zenithInvestments.getLatestMessage());
-
-
     }
 }

@@ -1,22 +1,37 @@
-import java.util.Observable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StockAgent extends Observable {
+public class StockAgent {
 
     private double stockMarketValue;
+    private final List<Agency> agencies = new ArrayList<>();
 
-    public double getStockMarketValue() {
-        return stockMarketValue;
+
+    public void addObserver(Agency agency) {
+        this.agencies.add(agency);
     }
+
+    public void removeObserver(StockBrokerAgency agency) {
+        this.agencies.remove(agency);
+    }
+
 
     public void stockMarketUp(double stockValue) {
         this.stockMarketValue = stockValue;
-        setChanged();
-        notifyObservers(String.format("Stock market went UP to %.2f", this.stockMarketValue));
+
+        String defaultUpNotification = String.format("Stock market went UP to %.2f", this.stockMarketValue);
+
+        for (Agency agency : this.agencies) {
+            agency.update(defaultUpNotification);
+        }
     }
 
     public void stockMarketDown(double stockValue) {
         this.stockMarketValue = stockValue;
-        setChanged();
-        notifyObservers(String.format("Stock market went DOWN to %.2f", this.stockMarketValue));
+        String defaultDownNotification = String.format("Stock market went DOWN to %.2f", this.stockMarketValue);
+
+        for (Agency agency : this.agencies) {
+            agency.update(defaultDownNotification);
+        }
     }
 }

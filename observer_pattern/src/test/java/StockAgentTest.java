@@ -8,10 +8,11 @@ class StockAgentTest {
 
     @Test
     public void testStockAgentNotifications() {
+
         StockAgent agent = new StockAgent();
 
-        Observer alphaBrokers = new StockBrokerAgency("Alpha Brokers");
-        Observer zenithInvestments = new StockBrokerAgency("Zenith Investments");
+        StockBrokerAgency alphaBrokers = new StockBrokerAgency("Alpha Brokers");
+        StockBrokerAgency zenithInvestments = new StockBrokerAgency("Zenith Investments");
 
         agent.addObserver(alphaBrokers);
         agent.addObserver(zenithInvestments);
@@ -20,15 +21,15 @@ class StockAgentTest {
         String zenitInvestmentsExpectedUPMessage = "Zenith Investments received notification: Stock market went UP to 150,75";
         agent.stockMarketUp(150.75);
 
-        assertEquals(alphaBrokersExpectedUpMessage, ((StockBrokerAgency)alphaBrokers).getLatestMessage());
-        assertEquals(zenitInvestmentsExpectedUPMessage, ((StockBrokerAgency)zenithInvestments).getLatestMessage());
+        assertEquals(alphaBrokersExpectedUpMessage, alphaBrokers.getLatestMessage());
+        assertEquals(zenitInvestmentsExpectedUPMessage, zenithInvestments.getLatestMessage());
 
         String alphaBrokersExpectedDOWNMessage = "Alpha Brokers received notification: Stock market went DOWN to 145,50";
         String zenitInvestmentsExpectedDOWNMessage = "Zenith Investments received notification: Stock market went DOWN to 145,50";
         agent.stockMarketDown(145.5);
 
-        assertEquals(alphaBrokersExpectedDOWNMessage, ((StockBrokerAgency)alphaBrokers).getLatestMessage());
-        assertEquals(zenitInvestmentsExpectedDOWNMessage, ((StockBrokerAgency)zenithInvestments).getLatestMessage());
+        assertEquals(alphaBrokersExpectedDOWNMessage, alphaBrokers.getLatestMessage());
+        assertEquals(zenitInvestmentsExpectedDOWNMessage, zenithInvestments.getLatestMessage());
 
 
     }

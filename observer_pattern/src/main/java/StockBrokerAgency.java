@@ -1,7 +1,7 @@
 import java.util.Observable;
 import java.util.Observer;
 
-public class StockBrokerAgency implements Observer {
+public class StockBrokerAgency implements Agency {
 
     private final String name;
     private String latestMessage;
@@ -20,10 +20,9 @@ public class StockBrokerAgency implements Observer {
     }
 
     @Override
-    public void update(Observable agent, Object notification) {
+    public void update(Object notification) {
         this.latestMessage = String.format("%s received notification: %s",
                 this.name, notification);
-
         System.out.println(this.latestMessage);
     }
 }
